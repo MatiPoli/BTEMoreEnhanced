@@ -28,6 +28,7 @@ import com.github.dixiecyanide.btemoreenhanced.userdata.UdUtils;
 
 import com.github.dixiecyanide.btemoreenhanced.logger.Logger;
 import com.github.dixiecyanide.btemoreenhanced.events.CheckJoinPlayerUd;
+import com.github.dixiecyanide.btemoreenhanced.events.PlayerInteractListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +77,7 @@ public class BTEMoreEnhanced extends JavaPlugin {
         udUtils = new UdUtils();
         udUtils.checkUdFolder();
         getServer().getPluginManager().registerEvents(new CheckJoinPlayerUd(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
         new Metrics(this, 20042);
         getLogger().info("\033[0;35m" + "Searching schematics..." + "\033[0m");
         new SchemCollector();
