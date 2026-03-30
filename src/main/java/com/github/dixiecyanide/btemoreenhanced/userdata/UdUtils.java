@@ -110,7 +110,7 @@ public class UdUtils {
         switch (key) {
             case "Reach":
                 try {
-                    udMap.replace(key, Double.parseDouble(value.toString()));
+                    udMap.put(key, Double.parseDouble(value.toString()));
                 } catch (ClassCastException e) {
                     bme.getBMEChatLogger().error(commandSender, "bme.error.NaN", null);
                     return false;
@@ -121,7 +121,7 @@ public class UdUtils {
                     bme.getBMEChatLogger().error(commandSender, "bme.error.settings.boolean", null);
                     return false;
                 }
-                udMap.replace(key, Boolean.parseBoolean(value.toString()));
+                udMap.put(key, Boolean.parseBoolean(value.toString()));
             break;
             case "ShortcutIncrement":
                 try {
@@ -139,7 +139,7 @@ public class UdUtils {
                     bme.getBMEChatLogger().error(commandSender, "bme.error.settings.shortcut-increment-max", shortcutIncrementMax.toString());
                     return false;
                 }
-                udMap.replace(key, value);
+                udMap.put(key, value);
             break;
             case "TerrTop":
                 try {
@@ -150,10 +150,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (ClassCastException e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                     // throw wrror
                 }
@@ -167,10 +167,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                     //throw error
                 }
@@ -182,10 +182,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                 }
             break;
@@ -196,21 +196,21 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                 }
             break;
             case "Terraform":
-                udMap.replace(key, value);
+                udMap.put(key, value);
             break;
             case "UnusedTreepacks":
                 if (value.toString().equals("none")){
                     value = "";
                 }
-                udMap.replace(key, List.of(value.toString().replace(" ", "").split(",")));
+                udMap.put(key, List.of(value.toString().replace(" ", "").split(",")));
             break;
             default:
                 bme.getBMEChatLogger().error(commandSender, "bme.error.invalid-arg", null);
