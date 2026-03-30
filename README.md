@@ -127,8 +127,8 @@ Each action executes the corresponding WorldEdit command (`//expand`, `//shift`,
 
 ### Configuration
 Shortcuts can be customized through personal [settings](#settings) using the `/bmesettings` command:
-- **Shortcut enabled**: Toggle shortcuts on/off (default: `true`)
-- **Shortcut increment**: Number of blocks to expand/shift/contract per click (default: `1`, must be positive and not exceed the global maximum)
+- **Shortcut enabled**: Toggle shortcuts on/off
+- **Shortcut increment**: Number of blocks to expand/shift/contract per click (must be positive and not exceed the global maximum)
 
 The global maximum increment value is set in the [config](src/main/resources/config.yml).
 
