@@ -20,6 +20,9 @@ public class PlayerInteractListener implements Listener {
         if (!shortcutEnabled) {
             return;
         }
+        if (!p.hasPermission("btemoreenhanced.player.shortcuts")) {
+            return;
+        }
         if (event.getItem() != null && event.getItem().getType() == Material.WOODEN_AXE) {
             switch (event.getAction()) {
                 case LEFT_CLICK_AIR:
