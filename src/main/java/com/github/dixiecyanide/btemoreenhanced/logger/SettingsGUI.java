@@ -88,7 +88,7 @@ public class SettingsGUI {
             resetButton.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,
                                       "//bmesettings reset"));
 
-        for (Integer i = 0; i < 6; i++) {
+        for (Integer i = 0; i < valueNames.size(); i++) {
             msgValueName.setText("\n- " + valueNames.get(i) + ": ");
             msgValue.setText(values.get(i));
             msgChangeBtn.setClickEvent

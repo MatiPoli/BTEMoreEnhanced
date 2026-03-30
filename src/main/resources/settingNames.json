@@ -1,5 +1,7 @@
 {
     "Reach": "Reach",
+    "ShortcutEnabled": "Shortcut enabled",
+    "ShortcutIncrement": "Shortcut increment",
     "TerrTop": "Remove Top",
     "TerrBot": "Remove Bot",
     "TerrBlock": "Terraform block",
