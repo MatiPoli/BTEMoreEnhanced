@@ -49,6 +49,8 @@ public class UdUtils {
     private static Integer defaultBotRemove = plugin.getConfig().getInt("DefaultBotRemove");
     private static String defaultBlock = plugin.getConfig().getString("DefaultBlock");
     private static String defaultBiome = plugin.getConfig().getString("DefaultBiome");
+    private static Boolean defaultShortcutEnabled = plugin.getConfig().getBoolean("DefaultShortcutEnabled");
+    private static Integer defaultShortcutIncrement = plugin.getConfig().getInt("DefaultShortcutIncrement");
     private File userdataDir;
 
     public UdUtils() {
@@ -108,11 +110,36 @@ public class UdUtils {
         switch (key) {
             case "Reach":
                 try {
-                    udMap.replace(key, Double.parseDouble(value.toString()));
+                    udMap.put(key, Double.parseDouble(value.toString()));
                 } catch (ClassCastException e) {
                     bme.getBMEChatLogger().error(commandSender, "bme.error.NaN", null);
                     return false;
                 }
+            break;
+            case "ShortcutEnabled":
+                if (!value.toString().equalsIgnoreCase("true") && !value.toString().equalsIgnoreCase("false")) {
+                    bme.getBMEChatLogger().error(commandSender, "bme.error.settings.boolean", null);
+                    return false;
+                }
+                udMap.put(key, Boolean.parseBoolean(value.toString()));
+            break;
+            case "ShortcutIncrement":
+                try {
+                    value = Integer.valueOf(value.toString());
+                } catch (NumberFormatException e) {
+                    bme.getBMEChatLogger().error(commandSender, "bme.error.not-an-integer", null);
+                    return false;
+                }
+                if ((Integer) value <= 0) {
+                    bme.getBMEChatLogger().error(commandSender, "bme.error.settings.positive-integer", null);
+                    return false;
+                }
+                Integer shortcutIncrementMax = plugin.getConfig().getInt("ShortcutIncrementMax");
+                if ((Integer) value > shortcutIncrementMax) {
+                    bme.getBMEChatLogger().error(commandSender, "bme.error.settings.shortcut-increment-max", shortcutIncrementMax.toString());
+                    return false;
+                }
+                udMap.put(key, value);
             break;
             case "TerrTop":
                 try {
@@ -123,10 +150,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (ClassCastException e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                     // throw wrror
                 }
@@ -140,10 +167,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                     //throw error
                 }
@@ -155,10 +182,10 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                 }
             break;
@@ -169,21 +196,21 @@ public class UdUtils {
                 }
                 try {
                     Map<String, Object> tfMap = (Map<String, Object>) udMap.get("Terraform");
-                    tfMap.replace(key, value);
-                    udMap.replace("Terraform", tfMap);
+                    tfMap.put(key, value);
+                    udMap.put("Terraform", tfMap);
                 } catch (Exception e) {
-                    udMap.replace("Terraform", getDefaultUd().get("Terraform"));
+                    udMap.put("Terraform", getDefaultUd().get("Terraform"));
                     return false;
                 }
             break;
             case "Terraform":
-                udMap.replace(key, value);
+                udMap.put(key, value);
             break;
             case "UnusedTreepacks":
                 if (value.toString().equals("none")){
                     value = "";
                 }
-                udMap.replace(key, List.of(value.toString().replace(" ", "").split(",")));
+                udMap.put(key, List.of(value.toString().replace(" ", "").split(",")));
             break;
             default:
                 bme.getBMEChatLogger().error(commandSender, "bme.error.invalid-arg", null);
@@ -222,6 +249,20 @@ public class UdUtils {
         switch (key) {
             case "Reach":
                 value = udMap.get(key);
+            break;
+            case "ShortcutEnabled":
+                value = udMap.get(key);
+                if (value == null) {
+                    value = defaultShortcutEnabled;
+                    updateUd(id, key, value);
+                }
+            break;
+            case "ShortcutIncrement":
+                value = udMap.get(key);
+                if (value == null) {
+                    value = defaultShortcutIncrement;
+                    updateUd(id, key, value);
+                }
             break;
             case "TerrTop":
                 try {
@@ -275,6 +316,8 @@ public class UdUtils {
         
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("Reach", -1);
+        dataMap.put("ShortcutEnabled", defaultShortcutEnabled);
+        dataMap.put("ShortcutIncrement", defaultShortcutIncrement);
         dataMap.put("Terraform", terraformMap);
         dataMap.put("UnusedTreepacks", new ArrayList<String>());
         

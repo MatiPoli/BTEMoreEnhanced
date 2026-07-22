@@ -82,6 +82,7 @@ permissions:
       btemoreenhanced.selection.delpoint: true
       btemoreenhanced.player.reach: true
       btemoreenhanced.player.settings: true
+      btemoreenhanced.player.shortcuts: true
   btemoreenhanced.admin.*:
     description: All "admin" perms
     children:
@@ -117,6 +118,9 @@ permissions:
     children:
       btemoreenhanced.player.reach: true
       btemoreenhanced.player.settings: true
+      btemoreenhanced.player.shortcuts: true
+  btemoreenhanced.player.shortcuts:
+    description: Allows usage of selection shortcuts
   btemoreenhanced.player.reach:
     description: Allows usage of //reach
   btemoreenhanced.player.settings:

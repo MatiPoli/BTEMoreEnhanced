@@ -64,6 +64,8 @@ The moment player joins, they get default personal config, which is, basically, 
 &nbsp;&nbsp;Sends TUI with personal settings, which can be changed.  
 &nbsp;&nbsp;Things that can be customised:
     - Reach minecraft defaults override (`-1` to use minecraft defaults)
+    - Shortcut enabled (toggle wooden axe shortcuts on/off)
+    - Shortcut increment (blocks to expand/shift/contract per click)
     - Terraform top remove  
     - Terraform bottom remove  
     - Terraform block  
@@ -111,3 +113,31 @@ These schematic paths are for trees from the BTE tree pack.
 
 - `//wood -s longleaf018 !lime_wool -includeAir`  
 &nbsp;&nbsp;Uses only `longleaf018.schematic`. Trees are pasted above all blocks except `lime_wool`. `-includeAir` pastes schematic with all air blocks, as if `//paste` was used.
+
+## How to use Wooden Axe Shortcuts
+Hold a wooden axe and perform air clicks to quickly execute selection expansion/contraction commands.
+
+### How it works
+When you have a wooden axe in hand:
+- **Left Click (Air)**: Expands your selection by the configured increment value
+- **Left Click (Air) + Sneaking**: Shifts your selection by the configured increment value  
+- **Right Click (Air)**: Contracts your selection by the configured increment value
+
+Each action executes the corresponding WorldEdit command (`//expand`, `//shift`, `//contract`) with the increment amount you've set in your [settings](#settings).
+
+### Configuration
+Shortcuts can be customized through personal [settings](#settings) using the `/bmesettings` command:
+- **Shortcut enabled**: Toggle shortcuts on/off
+- **Shortcut increment**: Number of blocks to expand/shift/contract per click (must be positive and not exceed the global maximum)
+
+The global maximum increment value is set in the [config](src/main/resources/config.yml).
+
+**Permissions:** Requires `btemoreenhanced.player.shortcuts`
+
+### Example
+If you have `Shortcut increment` set to `5`:
+- Left clicking in air with a wooden axe will expand your selection by 5 blocks
+- Left clicking while sneaking will shift it by 5 blocks
+- Right clicking will contract it by 5 blocks
+
+

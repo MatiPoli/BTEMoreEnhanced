@@ -115,6 +115,9 @@ public class BMESettings implements TabExecutor {
         CommandSuggestionEvent suggestEvent;
 
         switch (args[0]) {
+            case "ShortcutEnabled":
+                StringUtil.copyPartialMatches(args[1], new ArrayList<>(Arrays.asList("true", "false")), completions);
+                break;
             case "TerrBlock":
                 suggestEvent = new CommandSuggestionEvent(actor, "//set " + args[1]);
                 WorldEdit.getInstance().getEventBus().post(suggestEvent);
