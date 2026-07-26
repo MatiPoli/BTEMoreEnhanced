@@ -36,6 +36,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class BTEMoreEnhanced extends JavaPlugin {
     private Logger chatLogger;
@@ -55,7 +56,7 @@ public class BTEMoreEnhanced extends JavaPlugin {
             getLogger().severe("Couldn't find FastAsyncWorldEdit plugin. Please check plugins.");
             Bukkit.getPluginManager().disablePlugin(BTEMoreEnhanced.getPlugin(BTEMoreEnhanced.class));
         }
-        Integer serverVersion = Integer.valueOf(Bukkit.getBukkitVersion().substring(2, 4));
+        Integer serverVersion = getServerVersion();
         saveDefaultConfig();
         getCommand("/wood").setExecutor(new WoodCommand());
         getCommand("btemoreenhanced-reload").setExecutor(new ReloadConfig());
@@ -88,6 +89,13 @@ public class BTEMoreEnhanced extends JavaPlugin {
             getLogger().info("\033[0;31m" + "Update checking is disabled. Check for releases at https://github.com/DixieCyanide/BTEMoreEnhanced/releases." + "\033[0m");
         }
         getLogger().info("\033[0;92m" + "BTEMoreEnhanced enabled!" + "\033[0m");
+    }
+
+    private static @NonNull Integer getServerVersion() {
+        if (Bukkit.getBukkitVersion().startsWith("1.")) {
+            return Integer.valueOf(Bukkit.getBukkitVersion().substring(2, 4));
+        }
+        return Integer.valueOf(Bukkit.getBukkitVersion().substring(0, 2));
     }
 
     public Logger getBMEChatLogger() {
