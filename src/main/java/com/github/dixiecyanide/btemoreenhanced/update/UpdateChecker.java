@@ -48,7 +48,7 @@ public class UpdateChecker implements Runnable {
         logger.info("\033[0;35m" + "Current version: " + current + "\033[0m");
         logger.info("\033[0;35m" + "Latest version: " + latest + "\033[0m");
         if (!isLatestVersion()) {
-            logger.info("\033[0;31m" + "Plugin is not latest! Is it outdated? https://github.com/DixieCyanide/BTEMoreEnhanced/releases" + "\033[0m");
+            logger.info("\033[0;31m" + "Plugin is not latest! Is it outdated? https://github.com/MatiPoli/BTEMoreEnhanced" + "\033[0m");
         } else {
             logger.info("\033[0;92m" + "Plugin is up to date." + "\033[0m");
         }
@@ -75,7 +75,7 @@ public class UpdateChecker implements Runnable {
     private String getLatestVersion() {
         String latestVersion = "NOT FOUND";
         try {
-            URL url = new URL("https://api.github.com/repos/DixieCyanide/BTEMoreEnhanced/releases");
+            URL url = new URL("https://api.github.com/repos/MatiPoli/BTEMoreEnhanced/releases");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Accept", "application/json");
