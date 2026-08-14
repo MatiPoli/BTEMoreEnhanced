@@ -39,7 +39,7 @@ public class UpdateNotification implements Listener {
                 String versions = String.format("You are using version %s, newest version is %s", uc.getCurrent(), uc.getLatest());
                 player.sendMessage(ChatColor.DARK_PURPLE + "BTEMoreEnhanced is outdated!");
                 player.sendMessage(ChatColor.DARK_PURPLE + versions);
-                player.sendMessage(ChatColor.DARK_PURPLE + "Download update here: https://github.com/DixieCyanide/BTEMoreEnhanced/releases");
+                player.sendMessage(ChatColor.DARK_PURPLE + "Download update here: https://github.com/MatiPoli/BTEMoreEnhanced/releases");
             }
         }
     }
